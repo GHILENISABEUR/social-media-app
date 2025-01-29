@@ -31,6 +31,37 @@
         a {
             color: black;
         }
+
+        .post-image {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                height: auto;
+                position: relative;
+            }
+
+            .sidebar .nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .sidebar .nav-item {
+                margin: 5px;
+            }
+
+            .post-card {
+                margin: 10px !important;
+            }
+
+            .post-image {
+                height: auto;
+                width: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -38,7 +69,7 @@
    <!-- this a modal code -->
 <div class="container-fluid">
     <div class="row">
-        <nav class="col-md-2 d-none d-md-block sidebar" style="position: fixed;">
+        <nav class="col-md-2 d-none d-md-block sidebar">
             <div class="text-center mt-3">
                 <img src="{{profile.profileimg.url}}" alt="Profile Picture" class="profile-pic">
                 <h4 class="mt-2"><a href="/profile/{{user}}" style="text-decoration:none;">@{{user}}</a></h4>
@@ -65,8 +96,6 @@
                         data-bs-whatever="@getbootstrap">
                         <i class="fa-solid fa-circle-plus mr-1"></i> Create Post
                     </a>
-
-
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/profile/{{user}}">
@@ -81,7 +110,7 @@
             </ul>
         </nav>
         <!-- this is the main content code -->
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-md-4">
             <!-- Your main content goes here -->
         
             {% include "modal.html" %}
@@ -92,18 +121,15 @@
                 <div class="container" id="{{pos.id}}">
                     <div class="row">
                         <div class="col-md-6 mx-auto">
-                            <div class="post-card"style="border: 1px solid black;margin: 50px;">
-                                <img src="{{pos.image.url}}" alt="Post Image" class="post-image"
-                                    style="height: 584px; width:468px; margin: 25px;">
-                                <div class="post-content"style="margin-left: 19px;">
+                            <div class="post-card" style="border: 1px solid black; margin: 50px;">
+                                <img src="{{pos.image.url}}" alt="Post Image" class="post-image">
+                                <div class="post-content" style="margin-left: 19px;">
                                     <h5><a href="/profile/{{pos.user}}" style="text-decoration: none;">@{{pos.user}}</a></h5>
                                     <p>{{pos.caption}}</p>
                                     <p class="text-muted">{{pos.created_at}}</p>
                                     <hr>
                                     <div class="d-flex justify-content-between" style="margin-bottom: 8px; margin-right:10px;">
-            
                                         <a href="/like-post/{{pos.id}}" class="btn btn-outline-primary">Like</a>
-            
                                         {% if pos.no_of_likes == 0 %}
                                         <p>0</p>
                                         {% elif pos.no_of_likes == 1 %}
@@ -118,13 +144,8 @@
                     </div>
                 </div>
                 {% endfor %}
-            
             </div>
-        
-        
         </main>
-
-
     </div>
 </div>
    
